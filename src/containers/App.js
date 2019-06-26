@@ -13,7 +13,11 @@ class App extends React.Component {
       <div className="App">
         <User surname={user.surname} name={user.name} />
         <header>This is your's photos:</header>
-        <Page page={page.photos} year={page.year} setYear={getPhotosAction} />
+        <Page 
+          page={page.photos} 
+          year={page.year}
+          isFetching={page.isFetching}
+          getPhotos={getPhotosAction} />
         {/* <h3> Hello: {this.props.user.surname} {this.props.user.name}! </h3>
         <h3> You have: {this.props.page.photos.length} photo, for{" "}
           {this.props.page.year} year.</h3> */}
