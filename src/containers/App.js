@@ -2,19 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import { User } from "../components/User";
 import { Page } from "../components/Page";
-//прокидаємо  setYear
-import { setYear } from "../actions/PageActions";
+import { getPhotos } from "../actions/PageActions";
 
 // прокидаэмо this.props = store
 class App extends React.Component {
   render() {
-    const { user, page, setYearAction } = this.props;
+    const { user, page, getPhotosAction } = this.props;
     console.log("this page", page.photos);
     return (
       <div className="App">
         <User surname={user.surname} name={user.name} />
         <header>This is your's photos:</header>
-        <Page page={page.photos} year={page.year} setYear={setYearAction} />
+        <Page 
+          page={page.photos} 
+          year={page.year}
+          isFetching={page.isFetching}
+          getPhotos={getPhotosAction} />
         {/* <h3> Hello: {this.props.user.surname} {this.props.user.name}! </h3>
         <h3> You have: {this.props.page.photos.length} photo, for{" "}
           {this.props.page.year} year.</h3> */}
@@ -42,7 +45,7 @@ const mapDispatchToProps = dispatch => {
   return {
     //возвращаем объект который прикрепится к this.props
     //создаем функцию setYearAction которая диспатчит импортированый выше setYear с переданым кодом
-    setYearAction: year => dispatch(setYear(year))
+    getPhotosAction: year => dispatch(getPhotos(year))
   };
 };
 // подключить React компонент к Redux store.
